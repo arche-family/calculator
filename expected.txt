@@ -1,0 +1,1178 @@
+=== headless run: 23 frames ===
+
+--- frame 0  (clicks fed to guest: []) ---
+   [page] 46 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 1  (clicks fed to guest: []) ---
+   [tap] #31
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #47 "1"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 2  (clicks fed to guest: []) ---
+   [tap] #33
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #48 "12"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 3  (clicks fed to guest: []) ---
+   [tap] #37
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #49 "12+"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 4  (clicks fed to guest: []) ---
+   [tap] #35
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #50 "12+3"
+         #5 div.comes
+           #51 "15"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 5  (clicks fed to guest: []) ---
+   [tap] #21
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #52 "12+3×"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 6  (clicks fed to guest: []) ---
+   [tap] #23
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #53 "12+3×4"
+         #5 div.comes
+           #54 "24"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 7  (clicks fed to guest: []) ---
+   [tap] #45
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #55 "24"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 8  (clicks fed to guest: []) ---
+   [tap] #13
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #56 "24÷"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 9  (clicks fed to guest: []) ---
+   [tap] #39
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #57 "24÷0"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 10  (clicks fed to guest: []) ---
+   [tap] #45
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #58 "24÷0"
+         #5 div.comes
+           #59 "Can't divide by 0"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 11  (clicks fed to guest: []) ---
+   [tap] #7
+   [page] 46 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 12  (clicks fed to guest: []) ---
+   [tap] #9
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #60 "("
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 13  (clicks fed to guest: []) ---
+   [tap] #31
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #61 "(1"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 14  (clicks fed to guest: []) ---
+   [tap] #37
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #62 "(1+"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 15  (clicks fed to guest: []) ---
+   [tap] #33
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #63 "(1+2"
+         #5 div.comes
+           #64 "3"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 16  (clicks fed to guest: []) ---
+   [tap] #11
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #65 "(1+2)"
+         #5 div.comes
+           #66 "3"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 17  (clicks fed to guest: []) ---
+   [tap] #21
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #67 "(1+2)×"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 18  (clicks fed to guest: []) ---
+   [tap] #35
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #68 "(1+2)×3"
+         #5 div.comes
+           #69 "9"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 19  (clicks fed to guest: []) ---
+   [tap] #45
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #70 "9"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 20  (clicks fed to guest: []) ---
+   [tap] #13
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #71 "9÷"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 21  (clicks fed to guest: []) ---
+   [tap] #15
+   [page] 48 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #72 "9÷7"
+         #5 div.comes
+           #73 "1.28571428571"
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="
+
+--- frame 22  (clicks fed to guest: []) ---
+   [tap] #45
+   [page] 47 nodes
+   #1 body
+     #2 div.calc
+       #3 div.screen
+         #4 div.typed
+           #74 "1.28571428571"
+         #5 div.comes
+       #6 div.keys {click}
+         #7 button.op [data-k="C"]
+           #8 "AC"
+         #9 button.op [data-k="("]
+           #10 "("
+         #11 button.op [data-k=")"]
+           #12 ")"
+         #13 button.op [data-k="/"]
+           #14 "÷"
+         #15 button [data-k="7"]
+           #16 "7"
+         #17 button [data-k="8"]
+           #18 "8"
+         #19 button [data-k="9"]
+           #20 "9"
+         #21 button.op [data-k="*"]
+           #22 "×"
+         #23 button [data-k="4"]
+           #24 "4"
+         #25 button [data-k="5"]
+           #26 "5"
+         #27 button [data-k="6"]
+           #28 "6"
+         #29 button.op [data-k="-"]
+           #30 "−"
+         #31 button [data-k="1"]
+           #32 "1"
+         #33 button [data-k="2"]
+           #34 "2"
+         #35 button [data-k="3"]
+           #36 "3"
+         #37 button.op [data-k="+"]
+           #38 "+"
+         #39 button [data-k="0"]
+           #40 "0"
+         #41 button [data-k="."]
+           #42 "."
+         #43 button.op [data-k="B"]
+           #44 "⌫"
+         #45 button.eq [data-k="="]
+           #46 "="

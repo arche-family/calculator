@@ -1,0 +1,541 @@
+/// Calculator, the Arche phone's, written in Arche, as Android's: what
+/// is typed along the top, what it comes to under it, and a grid of keys.
+/// An app of the page (the dom interface): its keys are buttons, and their
+/// taps come as click events, through the bindings nimadir-app.sh makes of
+/// Nimadir's world. Times and divides before plus and minus, brackets
+/// first, and a bracket left open is closed at the end; = puts what it
+/// comes to in place of what was typed.
+import alloc;
+import dom;
+import host_api;
+import std;
+
+const SHEET: str = "body { padding: 0; } .calc { display: flex; flex-direction: column; } .screen { display: flex; flex-direction: column; padding: 16px; padding-top: 120px; min-height: 200px; gap: 8px; } .typed { font-size: 44px; text-align: right; color: var(--nimadir-text); } .comes { font-size: 28px; text-align: right; color: var(--nimadir-muted); min-height: 36px; } .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px; } button { display: flex; align-items: center; justify-content: center; height: 72px; border-radius: 36px; font-size: 26px; border: 0; background: var(--nimadir-surface); color: var(--nimadir-text); } button.op { background: var(--nimadir-accent-wash); } button.eq { background: var(--nimadir-accent); color: var(--nimadir-bg); }";
+
+/// The keys, a row of four at a time: what each shows, what it is, and
+/// its class.
+const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'>⌫</button><button class='eq' data-k='='>=</button>";
+
+type Calc = struct {
+    /// What is typed, in ASCII: digits, '.', 'e', brackets and + - * /.
+    typed: alloc.String,
+    /// Whether = was the last key: a digit starts afresh.
+    done: bool,
+    /// What = could not do, said instead of what it comes to.
+    fault: alloc.String,
+    /// The page's nodes: what is typed, what it comes to, and the keys.
+    shown: u32,
+    comes: u32,
+    keys: u32,
+}
+
+fn init(host: &mut std.Host, a: alloc.Allocator) -> Calc {
+    _ = dom.add_stylesheet(host, css: SHEET);
+    let root = dom.root(host);
+    var markup = alloc.String.from("<div class='calc'><div class='screen'><div class='typed'></div><div class='comes'></div></div><div class='keys'>", a);
+    markup.push_str(KEYS);
+    markup.push_str("</div></div>");
+    var why = alloc.String.init(a);
+    if not dom.set_markup(host, item: root, markup: markup.view(), why: &mut why, a: a) {
+        host_api.log(host, msg: why.view());
+    }
+    let shown = first(host, selector: ".typed", a: a);
+    let comes = first(host, selector: ".comes", a: a);
+    let keys = first(host, selector: ".keys", a: a);
+    dom.listen(host, item: keys, kind: "click");
+    return Calc { typed: alloc.String.init(a), done: false, fault: alloc.String.init(a), shown: shown, comes: comes, keys: keys };
+}
+
+/// The first node under the page that selector finds; 0 for none.
+fn first(host: &mut std.Host, selector: str, a: alloc.Allocator) -> u32 {
+    let found = dom.query_all(host, scope: dom.root(host), selector: selector, a: a);
+    if found.len() == 0 {
+        return 0;
+    }
+    return found.items()[0];
+}
+
+fn update(state: &mut Calc, host: &mut std.Host, a: alloc.Allocator) {
+    for e in dom.events(host, a: a).items() {
+        if e.kind.view().eq("click") {
+            match key_of(host, n: e.target, a: a) {
+                some(k) => { press(state, key: k.view(), a: a); }
+                none => { }
+            }
+        }
+    }
+    var typed = alloc.String.init(a);
+    pretty(state.typed.view(), out: &mut typed);
+    dom.set_text(host, item: state.shown, text: typed.view());
+    var comes = alloc.String.init(a);
+    if state.fault.len() > 0 {
+        comes.push_str(state.fault.view());
+    } else if not state.done and has_operator(state.typed.view()) {
+        var ev = Eval { at: 0, fault: 0 };
+        let v = evaluate(state.typed.view(), e: &mut ev);
+        if ev.fault == 0 {
+            var plain = alloc.String.init(a);
+            show(v, out: &mut plain);
+            pretty(plain.view(), out: &mut comes);
+        }
+    }
+    dom.set_text(host, item: state.comes, text: comes.view());
+}
+
+/// The key a click on n is, its data-k, or its nearest ancestor's.
+fn key_of(host: &mut std.Host, n: u32, a: alloc.Allocator) -> ?alloc.String {
+    var at = n;
+    var hops: u32 = 0;
+    while at != 0 and hops < 8 : (hops += 1) {
+        match dom.get_attribute(host, item: at, name: "data-k", a: a) {
+            some(k) => { return k; }
+            none => { }
+        }
+        at = dom.parent(host, item: at) orelse 0;
+    }
+    return none;
+}
+
+fn last_byte(s: str) -> u8 {
+    if s.len() == 0 {
+        return 0;
+    }
+    return s.bytes()[s.len() - 1];
+}
+
+fn is_digit(b: u8) -> bool {
+    return b >= '0' and b <= '9';
+}
+
+fn is_operator(b: u8) -> bool {
+    return b == '+' or b == '-' or b == '*' or b == '/';
+}
+
+fn has_operator(s: str) -> bool {
+    var i: usize = 1;
+    let b = s.bytes();
+    while i < b.len() : (i += 1) {
+        // A minus after an e, or first, is a number's sign.
+        if is_operator(b[i]) and b[i - 1] != 'e' {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// Whether the number being typed, at the end of s, has a point already.
+fn has_point(s: str) -> bool {
+    let b = s.bytes();
+    var i = b.len();
+    while i > 0 and (is_digit(b[i - 1]) or b[i - 1] == '.' or b[i - 1] == 'e') {
+        i -= 1;
+        if b[i] == '.' {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// How many brackets are open.
+fn open_brackets(s: str) -> i32 {
+    var n: i32 = 0;
+    for b in s.bytes() {
+        if b.* == '(' {
+            n += 1;
+        } else if b.* == ')' {
+            n -= 1;
+        }
+    }
+    return n;
+}
+
+/// A key pressed: what is typed after it.
+fn press(state: &mut Calc, key: str, a: alloc.Allocator) {
+    state.fault = alloc.String.init(a);
+    let k = key.bytes();
+    if k.len() == 0 {
+        return;
+    }
+    if key.eq("C") {
+        state.typed = alloc.String.init(a);
+        state.done = false;
+        return;
+    }
+    if key.eq("B") {
+        let n = state.typed.len();
+        if n > 0 {
+            let shorter = alloc.String.from(state.typed.view()[0..n - 1], a);
+            state.typed = shorter;
+        }
+        state.done = false;
+        return;
+    }
+    if key.eq("=") {
+        if state.typed.len() == 0 {
+            return;
+        }
+        var ev = Eval { at: 0, fault: 0 };
+        let v = evaluate(state.typed.view(), e: &mut ev);
+        if ev.fault == 2 {
+            state.fault = alloc.String.from("Can't divide by 0", a);
+        } else if ev.fault != 0 {
+            state.fault = alloc.String.from("Bad expression", a);
+        } else {
+            var result = alloc.String.init(a);
+            show(v, out: &mut result);
+            state.typed = result;
+            state.done = true;
+        }
+        return;
+    }
+    let c = k[0];
+    let last = last_byte(state.typed.view());
+    if is_digit(c) {
+        if state.done {
+            state.typed = alloc.String.init(a);
+            state.done = false;
+        }
+        if last == ')' {
+            state.typed.push_ascii('*');
+        }
+        // No 0 before another digit at a number's start.
+        if last == '0' and lone_zero(state.typed.view()) {
+            let n = state.typed.len();
+            let shorter = alloc.String.from(state.typed.view()[0..n - 1], a);
+            state.typed = shorter;
+        }
+        state.typed.push_ascii(c);
+        return;
+    }
+    if c == '.' {
+        if state.done {
+            state.typed = alloc.String.init(a);
+            state.done = false;
+        }
+        if has_point(state.typed.view()) {
+            return;
+        }
+        if not is_digit(last_byte(state.typed.view())) {
+            state.typed.push_ascii('0');
+        }
+        state.typed.push_ascii('.');
+        return;
+    }
+    state.done = false;
+    if is_operator(c) {
+        if last == 0 or last == '(' {
+            // Only a minus begins a number.
+            if c == '-' {
+                state.typed.push_ascii(c);
+            }
+            return;
+        }
+        if is_operator(last) {
+            if c == '-' and (last == '*' or last == '/') {
+                state.typed.push_ascii(c);
+                return;
+            }
+            // Another operator in its place, past a sign after * or /.
+            let end = operator_start(state.typed.view());
+            if end == 0 {
+                return;
+            }
+            let shorter = alloc.String.from(state.typed.view()[0..end], a);
+            state.typed = shorter;
+        }
+        if last == '.' {
+            state.typed.push_ascii('0');
+        }
+        state.typed.push_ascii(c);
+        return;
+    }
+    if c == '(' {
+        if is_digit(last) or last == ')' or last == '.' {
+            state.typed.push_ascii('*');
+        }
+        state.typed.push_ascii('(');
+        return;
+    }
+    if c == ')' {
+        if open_brackets(state.typed.view()) > 0 and (is_digit(last) or last == ')' or last == '.') {
+            state.typed.push_ascii(')');
+        }
+    }
+}
+
+/// Whether the 0 that ends s is a number's whole start.
+fn lone_zero(s: str) -> bool {
+    let b = s.bytes();
+    if b.len() < 2 {
+        return true;
+    }
+    let before = b[b.len() - 2];
+    return not (is_digit(before) or before == '.');
+}
+
+/// Where the operators that end s start: one, or a minus after * or /.
+fn operator_start(s: str) -> usize {
+    let b = s.bytes();
+    var end = b.len() - 1;
+    if end > 0 and b[end] == '-' and (b[end - 1] == '*' or b[end - 1] == '/') {
+        end -= 1;
+    }
+    return end;
+}
+
+/// s as the screen shows it: − × ÷ for - * /, and E for e.
+fn pretty(s: str, out: &mut alloc.String) {
+    let b = s.bytes();
+    var i: usize = 0;
+    while i < b.len() : (i += 1) {
+        let c = b[i];
+        if c == '-' and i > 0 and b[i - 1] == 'e' {
+            out.push_str("-");
+        } else if c == '-' {
+            out.push_str("−");
+        } else if c == '*' {
+            out.push_str("×");
+        } else if c == '/' {
+            out.push_str("÷");
+        } else if c == 'e' {
+            out.push_str("E");
+        } else {
+            out.push_ascii(c);
+        }
+    }
+}
+
+// ---- reckoning ------------------------------------------------------------------------
+
+/// Where reading has got to, and what went wrong: 0 nothing, 1 what is
+/// typed is not a whole expression, 2 a division by 0.
+type Eval = struct {
+    at: usize,
+    fault: u32,
+}
+
+/// What s comes to.
+fn evaluate(s: str, e: &mut Eval) -> f64 {
+    let v = sum(s, e: e);
+    if e.fault == 0 and e.at != s.len() {
+        e.fault = 1;
+    }
+    return v;
+}
+
+fn sum(s: str, e: &mut Eval) -> f64 {
+    var v = product(s, e: e);
+    let b = s.bytes();
+    while e.fault == 0 and e.at < b.len() and (b[e.at] == '+' or b[e.at] == '-') {
+        let op = b[e.at];
+        e.at += 1;
+        let w = product(s, e: e);
+        if op == '+' {
+            v = v + w;
+        } else {
+            v = v - w;
+        }
+    }
+    return v;
+}
+
+fn product(s: str, e: &mut Eval) -> f64 {
+    var v = factor(s, e: e);
+    let b = s.bytes();
+    while e.fault == 0 and e.at < b.len() and (b[e.at] == '*' or b[e.at] == '/') {
+        let op = b[e.at];
+        e.at += 1;
+        let w = factor(s, e: e);
+        if op == '*' {
+            v = v * w;
+        } else if w == 0.0 {
+            e.fault = 2;
+        } else {
+            v = v / w;
+        }
+    }
+    return v;
+}
+
+fn factor(s: str, e: &mut Eval) -> f64 {
+    let b = s.bytes();
+    if e.at >= b.len() {
+        e.fault = 1;
+        return 0.0;
+    }
+    if b[e.at] == '-' {
+        e.at += 1;
+        return 0.0 - factor(s, e: e);
+    }
+    if b[e.at] == '(' {
+        e.at += 1;
+        let v = sum(s, e: e);
+        if e.at < b.len() and b[e.at] == ')' {
+            e.at += 1;
+        } else if e.at < b.len() {
+            e.fault = 1;
+        }
+        // A bracket left open at the end is closed there.
+        return v;
+    }
+    return number(s, e: e);
+}
+
+/// A number at e.at: digits, a point and more, and an exponent.
+fn number(s: str, e: &mut Eval) -> f64 {
+    let b = s.bytes();
+    var mantissa: u64 = 0;
+    var count: u32 = 0;
+    var scale: i32 = 0;
+    var seen = false;
+    while e.at < b.len() and is_digit(b[e.at]) {
+        if count < 18 {
+            mantissa = mantissa * 10 + (b[e.at] - '0') as u64;
+            count += 1;
+        } else {
+            scale += 1;
+        }
+        seen = true;
+        e.at += 1;
+    }
+    if e.at < b.len() and b[e.at] == '.' {
+        e.at += 1;
+        while e.at < b.len() and is_digit(b[e.at]) {
+            if count < 18 {
+                mantissa = mantissa * 10 + (b[e.at] - '0') as u64;
+                count += 1;
+                scale -= 1;
+            }
+            seen = true;
+            e.at += 1;
+        }
+    }
+    if not seen {
+        e.fault = 1;
+        return 0.0;
+    }
+    if e.at < b.len() and b[e.at] == 'e' {
+        e.at += 1;
+        var negative = false;
+        if e.at < b.len() and b[e.at] == '-' {
+            negative = true;
+            e.at += 1;
+        }
+        var x: i32 = 0;
+        var any = false;
+        while e.at < b.len() and is_digit(b[e.at]) and x < 1000 {
+            x = x * 10 + (b[e.at] - '0') as i32;
+            any = true;
+            e.at += 1;
+        }
+        if not any {
+            e.fault = 1;
+            return 0.0;
+        }
+        if negative {
+            scale -= x;
+        } else {
+            scale += x;
+        }
+    }
+    let m = mantissa as f64;
+    if scale >= 0 {
+        return m * power(scale);
+    }
+    return m / power(0 - scale);
+}
+
+/// 10 to the n.
+fn power(n: i32) -> f64 {
+    var v: f64 = 1.0;
+    var i: i32 = 0;
+    while i < n and i < 400 : (i += 1) {
+        v = v * 10.0;
+    }
+    return v;
+}
+
+/// x as the calculator shows it, in ASCII: up to 12 digits that count, no
+/// zeros after the last of them, and an exponent past what fits.
+fn show(x: f64, out: &mut alloc.String) {
+    if x != x or x - x != 0.0 {
+        out.push_str("Error");
+        return;
+    }
+    var v = x;
+    if v < 0.0 {
+        out.push_str("-");
+        v = 0.0 - v;
+    }
+    if v == 0.0 {
+        out.push_str("0");
+        return;
+    }
+    if v >= 1000000000000000.0 or v < 0.000000001 {
+        // m times ten to the exp, m from 1 up to 10.
+        var exp: i32 = 0;
+        var m = v;
+        while m >= 10.0 {
+            m = m / 10.0;
+            exp += 1;
+        }
+        while m < 1.0 {
+            m = m * 10.0;
+            exp -= 1;
+        }
+        digits(m, places: 8, out: out);
+        out.push_str("e");
+        if exp < 0 {
+            out.push_str("-");
+            out.push_u64((0 - exp) as u64);
+        } else {
+            out.push_u64(exp as u64);
+        }
+        return;
+    }
+    var whole: u32 = 1;
+    var t = v;
+    while t >= 10.0 {
+        t = t / 10.0;
+        whole += 1;
+    }
+    var places: u32 = 0;
+    if whole < 12 {
+        places = 12 - whole;
+    }
+    digits(v, places: places, out: out);
+}
+
+/// v, not below 0, rounded to places after the point, those after the last
+/// that is not 0 left out.
+fn digits(v: f64, places: u32, out: &mut alloc.String) {
+    let p = power(places as i32);
+    let scaled = (v * p + 0.5) as u64;
+    var unit: u64 = 1;
+    var i: u32 = 0;
+    while i < places : (i += 1) {
+        unit = unit * 10;
+    }
+    out.push_u64(scaled / unit);
+    var frac = scaled % unit;
+    if frac == 0 {
+        return;
+    }
+    var shown = places;
+    while frac % 10 == 0 {
+        frac = frac / 10;
+        shown -= 1;
+    }
+    out.push_str(".");
+    // Zeros before it.
+    var lead: u64 = 1;
+    var k: u32 = 1;
+    while k < shown : (k += 1) {
+        lead = lead * 10;
+    }
+    while frac < lead {
+        out.push_str("0");
+        lead = lead / 10;
+    }
+    out.push_u64(frac);
+}
