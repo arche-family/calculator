@@ -6,15 +6,16 @@
 /// first, and a bracket left open is closed at the end; = puts what it
 /// comes to in place of what was typed.
 import alloc;
+import appkit;
 import dom;
 import host_api;
 import std;
 
-const SHEET: str = "body { padding: 0; } .calc { display: flex; flex-direction: column; min-height: 100vh; } .screen { display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-end; box-sizing: border-box; padding: 16px; min-height: 160px; gap: 8px; } .typed { font-size: 44px; text-align: right; color: var(--nimadir-text); } .comes { font-size: 28px; text-align: right; color: var(--nimadir-muted); min-height: 36px; } .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px; } button { display: flex; align-items: center; justify-content: center; height: 72px; padding: 0; border-radius: 36px; font-size: 26px; border: 0; background: var(--nimadir-surface); color: var(--nimadir-text); } button.op { background: var(--nimadir-accent-wash); } button.eq { background: var(--nimadir-accent); color: var(--nimadir-bg); }";
+const SHEET: str = "body { padding: 0; margin: 0; background: var(--kit-ground); } .calc { display: flex; flex-direction: column; min-height: 100vh; } .screen { display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-end; box-sizing: border-box; padding: 16px 22px 10px; min-height: 160px; gap: 6px; } .typed { font-size: 48px; text-align: right; color: var(--kit-text); } .comes { font-size: 28px; text-align: right; color: var(--kit-muted); min-height: 36px; } .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 14px 18px; } button { display: flex; align-items: center; justify-content: center; height: 72px; padding: 0; border-radius: 22px; font-size: 28px; font-weight: 400; border: 0; background: var(--kit-card); color: var(--kit-text); } button.op { color: #ff8a00; font-size: 30px; } button.eq { background: #ff8a00; color: #ffffff; font-size: 32px; } .icon { font-family: icons; font-size: 28px; line-height: 1; }";
 
 /// The keys, a row of four at a time: what each shows, what it is, and
 /// its class.
-const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'>⌫</button><button class='eq' data-k='='>=</button>";
+const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'><span class='icon'>backspace</span></button><button class='eq' data-k='='>=</button>";
 
 type Calc = struct {
     /// What is typed, in ASCII: digits, '.', 'e', brackets and + - * /.
@@ -30,6 +31,8 @@ type Calc = struct {
 }
 
 fn init(host: &mut std.Host, a: alloc.Allocator) -> Calc {
+    let kit = appkit.css(a);
+    _ = dom.add_stylesheet(host, css: kit.view());
     _ = dom.add_stylesheet(host, css: SHEET);
     let root = dom.root(host);
     var markup = alloc.String.from("<div class='calc'><div class='screen'><div class='typed'></div><div class='comes'></div></div><div class='keys'>", a);
