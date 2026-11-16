@@ -24,7 +24,7 @@ With [arche-lang](https://github.com/arche-family/arche-lang) checked out next t
 
 ## Test
 
-`headless` holds the taps of a headless run, and `expected.txt` holds what Nimadir's own shell said to them. `app-check.sh` runs the app with arche-wasm, by the interpreter and by the JIT, and compares what it says with `expected.txt`. CI runs it on every push.
+`headless` holds the taps of a headless run, and `expected.txt` holds what Nimadir's own shell said to them. `app-check.sh` runs the app with arche-wasm, by the interpreter and by the JIT, and compares what it says with `expected.txt`. CI runs it when started by hand (Actions' Run workflow).
 
 ```sh
 ../arche-lang/wasm/app-check.sh .
