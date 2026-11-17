@@ -11,11 +11,11 @@ import dom;
 import host_api;
 import std;
 
-const SHEET: str = "body { padding: 0; margin: 0; background: var(--kit-ground); } .calc { display: flex; flex-direction: column; min-height: 100vh; } .screen { display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-end; box-sizing: border-box; padding: 16px 22px 10px; min-height: 160px; gap: 6px; } .typed { font-size: 48px; text-align: right; color: var(--kit-text); } .comes { font-size: 28px; text-align: right; color: var(--kit-muted); min-height: 36px; } .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 14px 18px; } button { display: flex; align-items: center; justify-content: center; height: 72px; padding: 0; border-radius: 22px; font-size: 28px; font-weight: 400; border: 0; background: var(--kit-card); color: var(--kit-text); } button.op { color: #ff8a00; font-size: 30px; } button.eq { background: #ff8a00; color: #ffffff; font-size: 32px; } .icon { font-family: icons; font-size: 28px; line-height: 1; }";
+const SHEET: str = "body { padding: 0; margin: 0; background: var(--kit-ground); } .calc { display: flex; flex-direction: column; min-height: 100vh; } .screen { display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-end; box-sizing: border-box; padding: 16px 22px 10px; min-height: 160px; gap: 6px; } .typed { font-size: 48px; text-align: right; color: var(--kit-text); } .comes { font-size: 28px; text-align: right; color: var(--kit-muted); min-height: 36px; } .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 14px 18px; } button { display: flex; align-items: center; justify-content: center; height: 72px; padding: 0; border-radius: 22px; font-size: 28px; font-weight: 400; border: 0; background: var(--kit-card); color: var(--kit-text); } button.op { color: #ff8a00; font-size: 30px; } button.div { font-size: 40px; } button.eq { background: #ff8a00; color: #ffffff; font-size: 32px; } .icon { font-family: icons; font-size: 28px; line-height: 1; }";
 
 /// The keys, a row of four at a time: what each shows, what it is, and
 /// its class.
-const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'><span class='icon'>backspace</span></button><button class='eq' data-k='='>=</button>";
+const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op div' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'><span class='icon'>backspace</span></button><button class='eq' data-k='='>=</button>";
 
 type Calc = struct {
     /// What is typed, in ASCII: digits, '.', 'e', brackets and + - * /.
@@ -69,6 +69,10 @@ fn update(state: &mut Calc, host: &mut std.Host, a: alloc.Allocator) {
     }
     var typed = alloc.String.init(a);
     pretty(state.typed.view(), out: &mut typed);
+    // Nothing typed shows 0, as a calculator does.
+    if typed.len() == 0 {
+        typed.push_str("0");
+    }
     dom.set_text(host, item: state.shown, text: typed.view());
     var comes = alloc.String.init(a);
     if state.fault.len() > 0 {
