@@ -12,6 +12,8 @@ It works like Android's. What is typed is along the top, and what it comes to sh
 
 It is an app of the page: its keys are DOM buttons, and their taps come as click events.
 
+What it says shows in the phone's language, as the shell's `locale` names it: English, Uzbek or Russian (English for any other). The keys are the same in all three.
+
 ## Build
 
 With [arche-lang](https://github.com/arche-family/arche-lang) checked out next to this repository and built (`make -C stage0 && make -C compiler && make -C wasm`):

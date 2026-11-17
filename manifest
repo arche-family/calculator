@@ -1,5 +1,9 @@
 name: calculator
 version: 1
 title: Calculator
-about: Sums, in Arche
+about: Add, subtract, multiply and divide
+title.uz: Kalkulyator
+about.uz: Qoʻshish, ayirish, koʻpaytirish va boʻlish
+title.ru: Калькулятор
+about.ru: Сложение, вычитание, умножение и деление
 publisher: arche

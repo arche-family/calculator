@@ -4,7 +4,8 @@
 /// taps come as click events, through the bindings nimadir-app.sh makes of
 /// Nimadir's world. Times and divides before plus and minus, brackets
 /// first, and a bracket left open is closed at the end; = puts what it
-/// comes to in place of what was typed.
+/// comes to in place of what was typed. What it says is in the phone's
+/// language (host_api's locale): English, Uzbek or Russian.
 import alloc;
 import appkit;
 import dom;
@@ -17,6 +18,41 @@ const SHEET: str = "body { padding: 0; margin: 0; background: var(--kit-ground);
 /// its class.
 const KEYS: str = "<button class='op' data-k='C'>AC</button><button class='op' data-k='('>(</button><button class='op' data-k=')'>)</button><button class='op div' data-k='/'>÷</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button class='op' data-k='*'>×</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button class='op' data-k='-'>−</button><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button class='op' data-k='+'>+</button><button data-k='0'>0</button><button data-k='.'>.</button><button class='op' data-k='B'><span class='icon'>backspace</span></button><button class='eq' data-k='='>=</button>";
 
+/// The phone's languages the app speaks.
+const EN: u32 = 0;
+const UZ: u32 = 1;
+const RU: u32 = 2;
+
+/// The language of a locale as the phone says it ("uz-UZ"): English for
+/// one the app does not speak.
+fn lang_of(locale: str) -> u32 {
+    if locale.starts_with("uz") {
+        return UZ;
+    }
+    if locale.starts_with("ru") {
+        return RU;
+    }
+    return EN;
+}
+
+/// s, said in English, in lang: s itself in English, and for what the app
+/// has no words of.
+fn say(lang: u32, s: str) -> str {
+    if s.eq("Can't divide by 0") {
+        if lang == UZ { return "0 ga boʻlinmaydi"; }
+        if lang == RU { return "На 0 делить нельзя"; }
+    }
+    if s.eq("Bad expression") {
+        if lang == UZ { return "Notoʻgʻri ifoda"; }
+        if lang == RU { return "Неверное выражение"; }
+    }
+    if s.eq("Error") {
+        if lang == UZ { return "Xato"; }
+        if lang == RU { return "Ошибка"; }
+    }
+    return s;
+}
+
 type Calc = struct {
     /// What is typed, in ASCII: digits, '.', 'e', brackets and + - * /.
     typed: alloc.String,
@@ -28,6 +64,9 @@ type Calc = struct {
     shown: u32,
     comes: u32,
     keys: u32,
+    /// The phone's locale, as it was last read, and its language.
+    locale: alloc.String,
+    lang: u32,
 }
 
 fn init(host: &mut std.Host, a: alloc.Allocator) -> Calc {
@@ -46,7 +85,9 @@ fn init(host: &mut std.Host, a: alloc.Allocator) -> Calc {
     let comes = first(host, selector: ".comes", a: a);
     let keys = first(host, selector: ".keys", a: a);
     dom.listen(host, item: keys, kind: "click");
-    return Calc { typed: alloc.String.init(a), done: false, fault: alloc.String.init(a), shown: shown, comes: comes, keys: keys };
+    let locale = host_api.locale(host, a: a);
+    let lang = lang_of(locale.view());
+    return Calc { typed: alloc.String.init(a), done: false, fault: alloc.String.init(a), shown: shown, comes: comes, keys: keys, locale: locale, lang: lang };
 }
 
 /// The first node under the page that selector finds; 0 for none.
@@ -59,6 +100,13 @@ fn first(host: &mut std.Host, selector: str, a: alloc.Allocator) -> u32 {
 }
 
 fn update(state: &mut Calc, host: &mut std.Host, a: alloc.Allocator) {
+    // The phone's language, as it is now: the keys say no words, so what
+    // the screen says below is all that changes with it.
+    let locale = host_api.locale(host, a: a);
+    if not locale.view().eq(state.locale.view()) {
+        state.lang = lang_of(locale.view());
+        state.locale = locale;
+    }
     for e in dom.events(host, a: a).items() {
         if e.kind.view().eq("click") {
             match key_of(host, n: e.target, a: a) {
@@ -73,7 +121,8 @@ fn update(state: &mut Calc, host: &mut std.Host, a: alloc.Allocator) {
     if typed.len() == 0 {
         typed.push_str("0");
     }
-    dom.set_text(host, item: state.shown, text: typed.view());
+    // A number too large is "Error" (show), in the phone's language.
+    dom.set_text(host, item: state.shown, text: say(state.lang, s: typed.view()));
     var comes = alloc.String.init(a);
     if state.fault.len() > 0 {
         comes.push_str(state.fault.view());
@@ -86,7 +135,9 @@ fn update(state: &mut Calc, host: &mut std.Host, a: alloc.Allocator) {
             pretty(plain.view(), out: &mut comes);
         }
     }
-    dom.set_text(host, item: state.comes, text: comes.view());
+    // What = could not do, kept in English, or "Error", in the phone's
+    // language.
+    dom.set_text(host, item: state.comes, text: say(state.lang, s: comes.view()));
 }
 
 /// The key a click on n is, its data-k, or its nearest ancestor's.
